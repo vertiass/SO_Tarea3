@@ -11,3 +11,7 @@ Uno de los conceptos clave que hemos estudiado este semestre es la paginación, 
 3. A partir de los primeros treinta segundos de ejecución del programa, deberán comenzar a ocurrir dos cosas de forma periódica. En primer lugar, cada cinco segundos, un proceso aleatorio deberá finalizar su ejecución. En segundo lugar, y también cada 5 segundos, se deberá simular el acceso a una dirección virtual, generada también de manera aleatoria, y mostrada en pantalla. El programa deberá localizar la página correspondiente, y en caso de no encontrarla en RAM se deberá generar un page fault. Se deberá simular el proceso de swap, para lo cual se podrá emplear cualquier política de reemplazo de páginas, que deberá ser explicitada claramente.
 
 4. En caso de que no exista memoria disponible en swap o en la ram, se deberá finalizar el proceso de simulación y terminar el programa.
+
+
+
+![picture alt](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.kym-cdn.com%2Feditorials%2Ficons%2Fmobile%2F000%2F010%2F676%2Ftfw.jpg&f=1&nofb=1&ipt=9a64856c4edea18230116059d6bf155fb26a758ddd64c65fecb24c719a74fc43&ipo=images)
