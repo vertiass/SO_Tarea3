@@ -13,5 +13,30 @@ Uno de los conceptos clave que hemos estudiado este semestre es la paginación, 
 4. En caso de que no exista memoria disponible en swap o en la ram, se deberá finalizar el proceso de simulación y terminar el programa.
 
 
+## Implementación ##
 
-![picture alt](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fandroidphoria.com%2Fwp-content%2Fuploads%2FOrigen-del-meme-Chill-de-cojones-Tipo-tranquilo.webp&f=1&nofb=1&ipt=cf767a336012c3517e556f3355d3a5925ebf944bbab738a3e6772801372e80cd&ipo=images)
+El programa simula la gestión de memoria física y virtual mediante un algoritmo de reemplazo de páginas Least Recently Used (LRU), que permite mantener un seguimiento dinámico del uso de memoria, optimizando la asignación de recursos. El proceso inicia con la configuración de memoria por parte del usuario, quien define el tamaño de memoria física y el tamaño de página, generándose automáticamente una memoria virtual entre 1.5 y 4.5 veces el tamaño de la memoria física. Durante la ejecución, el programa crea procesos cada dos segundos con tamaños aleatorios, asignándoles páginas en memoria RAM y, si es necesario, en memoria swap, implementando un mecanismo de page fault que permite intercambiar páginas cuando la RAM se encuentra saturada.
+
+La política de reemplazo LRU garantiza que las páginas menos recientemente utilizadas sean candidatas para ser movidas a memoria swap, manteniendo en RAM las páginas con accesos más recientes. El programa monitorea constantemente el estado de la memoria, mostrando información detallada sobre el uso de páginas en RAM y swap, y termina su ejecución cuando no existen recursos de memoria disponibles, proporcionando un mensaje descriptivo del estado final del sistema.
+
+Para la correr del código, ejecutar lo siguiente:
+
+1. Compilar el código
+  `gcc -o simulacion_memoria simulacion_memoria.c`
+
+2. Ejecutar el programa
+  `./simulacion_memoria`
+
+### Datos de Prueba ###
+1. Tamaño Pequeño
+  - Memoria física: 100 MB
+  - Tamaño de página: 4 MB
+  - Memoria virtual esperada: 150 - 450 MB
+2. Tamaño Mediano
+  - Memoria física: 256 MB
+  - Tamaño de página: 8 MB
+  - Memoria virtual esperada: 384 - 1152 MB
+3. Tamaño Grande
+  - Memoria física: 512 MB
+  - Tamaño de página: 16 MB
+  - Memoria virtual esperada: 768 - 2304 MB
