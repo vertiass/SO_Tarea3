@@ -14,4 +14,4 @@ Uno de los conceptos clave que hemos estudiado este semestre es la paginación, 
 
 
 
-![picture alt](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.kym-cdn.com%2Feditorials%2Ficons%2Fmobile%2F000%2F010%2F676%2Ftfw.jpg&f=1&nofb=1&ipt=9a64856c4edea18230116059d6bf155fb26a758ddd64c65fecb24c719a74fc43&ipo=images)
+![picture alt](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fandroidphoria.com%2Fwp-content%2Fuploads%2FOrigen-del-meme-Chill-de-cojones-Tipo-tranquilo.webp&f=1&nofb=1&ipt=cf767a336012c3517e556f3355d3a5925ebf944bbab738a3e6772801372e80cd&ipo=images)
