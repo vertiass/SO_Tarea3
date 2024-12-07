@@ -12,7 +12,7 @@
 // Estructura para una página
 typedef struct {
     int process_id;      // ID del proceso al que pertenece
-    int page_number;     // Número de página dentro del proceso
+    int num_pagina;     // Número de página dentro del proceso
     int in_ram;         // 1 si está en RAM, 0 si está en swap
     time_t last_access; // Último acceso a la página (LRU)
 } Page;
@@ -122,7 +122,7 @@ int swap_in(void) {
             pages[i].in_ram = 0;
             
             printf("Page fault: Página %d del proceso %d movida a swap\n",
-                   pages[i].page_number, pages[i].process_id);
+                   pages[i].num_pagina, pages[i].process_id);
             return lru_page;
         }
     }
@@ -138,7 +138,7 @@ int asignar_pagina(Process *process) {
     for (int i = 0; i < ram_pages && pages_allocated < process->num_pages; i++) {
         if (pages[i].process_id == -1) {
             pages[i].process_id = process->id;
-            pages[i].page_number = pages_allocated;
+            pages[i].num_pagina = pages_allocated;
             pages[i].in_ram = 1;
             pages[i].last_access = time(NULL);
             process->page_table[pages_allocated] = i;
@@ -152,7 +152,7 @@ int asignar_pagina(Process *process) {
         
         if (pages[i].process_id == -1) {
             pages[i].process_id = process->id;
-            pages[i].page_number = pages_allocated;
+            pages[i].num_pagina = pages_allocated;
             pages[i].in_ram = 0;
             pages[i].last_access = time(NULL);
             process->page_table[pages_allocated] = i;
@@ -166,9 +166,9 @@ int asignar_pagina(Process *process) {
 // Liberar páginas de un proceso
 void liberar_paginas(Process *process) {
     for (int i = 0; i < process->num_pages; i++) {
-        int page_index = process->page_table[i];
-        pages[page_index].process_id = -1;
-        pages[page_index].page_number = -1;
+        int pag_index = process->page_table[i];
+        pages[pag_index].process_id = -1;
+        pages[pag_index].num_pagina = -1;
     }
     free(process->page_table);
     process->active = 0;
@@ -208,27 +208,27 @@ void acceso_direccion_virtual(void) {
     }
     
     Process *process = &processes[process_id];
-    int page_number = rand() % process->num_pages;
-    int page_index = process->page_table[page_number];
+    int num_pagina = rand() % process->num_pages;
+    int pag_index = process->page_table[num_pagina];
     
-    printf("\nAcceso a página %d del proceso %d\n", page_number, process_id);
+    printf("\nAcceso a página %d del proceso %d\n", num_pagina, process_id);
     
-    if (!pages[page_index].in_ram) {
+    if (!pages[pag_index].in_ram) {
         printf("Page fault! Página no está en RAM\n");
-        int new_ram_location = swap_in();
-        if (new_ram_location == -1) {
+        int new_ubic_ram = swap_in();
+        if (new_ubic_ram == -1) {
             printf("Error: No se puede realizar swap\n");
             should_exit = 1;
             return;
         }
         
         // Actualizar la tabla de páginas
-        pages[new_ram_location] = pages[page_index];
-        pages[new_ram_location].in_ram = 1;
-        process->page_table[page_number] = new_ram_location;
+        pages[new_ubic_ram] = pages[pag_index];
+        pages[new_ubic_ram].in_ram = 1;
+        process->page_table[num_pagina] = new_ubic_ram;
     }
     
-    pages[page_index].last_access = time(NULL);
+    pages[pag_index].last_access = time(NULL);
 }
 
 // Manejador del timer
@@ -251,19 +251,19 @@ void manejo_timer(int signum) {
 
 // Imprimir estado de la memoria
 void print_estado_memoria(void) {
-    int ram_used = 0, swap_used = 0;
+    int ram_usada = 0, swap_usada = 0;
     
     for (int i = 0; i < ram_pages; i++) {
-        if (pages[i].process_id != -1) ram_used++;
+        if (pages[i].process_id != -1) ram_usada++;
     }
     
     for (int i = ram_pages; i < total_paginas; i++) {
-        if (pages[i].process_id != -1) swap_used++;
+        if (pages[i].process_id != -1) swap_usada++;
     }
     
     printf("\n=== Estado de la Memoria ===\n");
-    printf("RAM: %d/%d páginas usadas\n", ram_used, ram_pages);
-    printf("Swap: %d/%d páginas usadas\n", swap_used, swap_pages);
+    printf("RAM: %d/%d páginas usadas\n", ram_usada, ram_pages);
+    printf("Swap: %d/%d páginas usadas\n", swap_usada, swap_pages);
     printf("Procesos activos: %d\n", num_procesos);
 }
 
@@ -274,14 +274,14 @@ int main(void) {
     scanf("%d", &mem_fisica_size);
     
     // Memoria virtual entre 1.5 y 4.5 veces la física
-    float multiplier = (rand() % 30 + 15) / 10.0;  // 1.5 a 4.5
-    mem_virtual_size = (int)(mem_fisica_size * multiplier);
+    float multiplicador = (rand() % 30 + 15) / 10.0;  // 1.5 a 4.5
+    mem_virtual_size = (int)(mem_fisica_size * multiplicador);
     
     printf("Ingrese el tamaño de página (MB): ");
     scanf("%d", &page_size);
     
     printf("\nMemoria virtual: %d MB (%.1fx la memoria física)\n", 
-           mem_virtual_size, multiplier);
+           mem_virtual_size, multiplicador);
     
     init_memory();
     
