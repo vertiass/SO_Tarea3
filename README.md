@@ -33,7 +33,7 @@ gcc -o simulacion_memoria simulacion_memoria.c
 ./simulacion_memoria
 ```
 
-### Datos de Prueba ###
+### *Datos de Prueba* ###
 1. Tamaño Pequeño
   - Memoria física: 100 MB
   - Tamaño de página: 4 MB
