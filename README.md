@@ -22,10 +22,16 @@ La política de reemplazo LRU garantiza que las páginas menos recientemente uti
 Para la correr del código, ejecutar lo siguiente:
 
 1. Compilar el código
-  `gcc -o simulacion_memoria simulacion_memoria.c`
+
+```bash
+gcc -o simulacion_memoria simulacion_memoria.c
+```
 
 2. Ejecutar el programa
-  `./simulacion_memoria`
+
+```bash
+./simulacion_memoria
+```
 
 ### Datos de Prueba ###
 1. Tamaño Pequeño
