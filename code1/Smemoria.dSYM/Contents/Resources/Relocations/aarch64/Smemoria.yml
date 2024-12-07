@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/hugo/workspace/6toSemestre/SO/T3/SO_Tarea3/code1/Smemoria'
+relocations:     []
+...
